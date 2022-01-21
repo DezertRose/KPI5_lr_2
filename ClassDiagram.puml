@@ -1,0 +1,397 @@
+@startuml
+class com.mycompany.app.Objects.User {
++ int id
++ String faculty
++ Hostel hostel
++ String mail
++ String password
++ String toString()
+}
+class com.mycompany.app.Hendler.Support {
++ {static} String toParseRequest(HttpExchange)
++ {static} void makeResponse(HttpExchange,Object)
++ {static} String makeJson(Object)
++ {static} String parsGetRequest(HttpExchange)
++ {static} ArrayList<String> getArrFromJson(String)
++ {static} Map<String,Object> getFromJSON(String)
+}
+class com.mycompany.app.App {
++ {static} void main(String[])
+}
+class com.mycompany.app.Specifications.SpecificationAnd {
+- Set<Specification<T>> set
++ boolean isSatisfiedBy(T)
++ SpecificationAbs<T> and(Specification<T>)
+}
+class com.mycompany.app.Hendler.Hendlers {
+}
+class com.mycompany.app.Hendler.Hendlers.StudentsHandler {
++ void handle(HttpExchange)
+}
+class com.mycompany.app.Hendler.Hendlers.UserHandler {
++ void handle(HttpExchange)
+}
+class com.mycompany.app.Hendler.Hendlers.HostelsHandler {
++ void handle(HttpExchange)
+}
+class com.mycompany.app.RequestThird {
+- String request
++ Object exec()
+- String get_type_request(String)
+}
+interface com.mycompany.app.RequestThird.HandlerRequest {
++ void setNext(HandlerRequest)
++ Object handler(String,String)
+}
+class com.mycompany.app.RequestThird.BasicRequest {
++ HandlerRequest next
++ void setNext(HandlerRequest)
++ Object handler(String,String)
+}
+class com.mycompany.app.RequestThird.GetRequest {
++ Object handler(String,String)
+}
+class com.mycompany.app.Specifications.SpecificationFaculty {
+- String tempFaculty
++ boolean isSatisfiedBy(Hostel)
+}
+class com.mycompany.app.ToBuild.Data {
++ insideData insideData
+~ Builder builder
++ void changeBuilder(Builder)
++ void insert(String)
+}
+class com.mycompany.app.ToBuild.Data.insideData {
++ int id
++ String name
++ int numbOfRooms
++ String state
++ String faculty
++ String letters
++ int numbOfGroup
++ Hostel hostel
++ int priv
++ String date
++ String mail
++ String password
++ String street
+}
+abstract class com.mycompany.app.Specifications.SpecificationAbs {
++ {abstract}boolean isSatisfiedBy(T)
++ SpecificationAbs<T> and(Specification<T>)
++ SpecificationAbs<T> or(Specification<T>)
++ SpecificationAbs<T> not()
+}
+class com.mycompany.app.Hendler.CrudData {
++ {static} ArrayList<Hostel> getHostelByFaculty(String,ArrayList<Hostel>)
++ {static} ArrayList<User> getUserByHostelName(String,ArrayList<User>)
++ {static} ArrayList<Students> getStudentByState(String,ArrayList<Students>)
+~ {static} ArrayList<T> useSpecification(ArrayList<T>,Specification<T>)
++ {static} ArrayList<Students> getStudentById(String,ArrayList<Students>)
++ {static} String createNewUser(String,ArrayList<User>,ArrayList<Hostel>)
++ {static} String updateHostel(String,ArrayList<Hostel>)
++ {static} String deleteStudents(String,ArrayList<Students>)
+}
+class com.mycompany.app.Objects.Students {
++ int id
++ String letters
++ int numb_of_group
++ String faculty
++ Hostel hostel
++ int privilege
++ String state
++ String date
++ String toString()
+}
+interface com.mycompany.app.ToBuild.Builder {
++ void reset()
++ void setId(int)
++ void setName(String)
++ void setNumbOfRoom(int)
++ void setState(String)
++ void setFaculty(String)
++ void setLetters(String)
++ void setNumbOfGroup(int)
++ void setHostel(Hostel)
++ void setPrivilege(int)
++ void setDate(String)
++ void setMail(String)
++ void setPassword(String)
++ void setStreet(String)
+}
+class com.mycompany.app.ToBuild.hostelBuild {
+~ Hostel result
++ void reset()
++ void setId(int)
++ void setName(String)
++ void setNumbOfRoom(int)
++ void setState(String)
++ void setFaculty(String)
++ void setLetters(String)
++ void setNumbOfGroup(int)
++ void setHostel(Hostel)
++ void setPrivilege(int)
++ void setDate(String)
++ void setMail(String)
++ void setPassword(String)
++ void setStreet(String)
++ Hostel getResult()
+}
+class com.mycompany.app.Specifications.SpecificationId {
+- int tempId
++ boolean isSatisfiedBy(Students)
+}
+class com.mycompany.app.Specifications.SpecificationOr {
+- Set<Specification<T>> set
++ boolean isSatisfiedBy(T)
++ SpecificationAbs<T> or(Specification<T>)
+}
+class com.mycompany.app.RequestSecond {
+- String request
++ Object exec()
+- String get_type_request(String)
+}
+interface com.mycompany.app.RequestSecond.HandlerRequest {
++ void setNext(HandlerRequest)
++ Object handler(String,String)
+}
+class com.mycompany.app.RequestSecond.BasicRequest {
++ HandlerRequest next
++ void setNext(HandlerRequest)
++ Object handler(String,String)
+}
+class com.mycompany.app.RequestSecond.GetRequest {
++ Object handler(String,String)
+}
+class com.mycompany.app.Objects.Hostel {
++ int id
++ String name
++ String street
++ int numb_of_room
++ String state
++ String faculty
++ String toString()
+}
+class com.mycompany.app.DatabaseConectionThird {
+~ {static} String db
+~ {static} String serverip
+~ {static} String serverPort
+~ {static} String url
+~ {static} String driver
+- {static} Connection connect
++ {static} Connection connectToDB()
++ {static} void closeConnection()
+}
+class com.mycompany.app.DatabaseConection {
+~ {static} String db
+~ {static} String serverip
+~ {static} String serverPort
+~ {static} String url
+~ {static} String driver
+- {static} Connection connect
++ {static} Connection connectToDB()
++ {static} void closeConnection()
+}
+class com.mycompany.app.ToBuild.studentsBuild {
+~ Students result
++ void reset()
++ void setId(int)
++ void setName(String)
++ void setNumbOfRoom(int)
++ void setState(String)
++ void setFaculty(String)
++ void setLetters(String)
++ void setNumbOfGroup(int)
++ void setHostel(Hostel)
++ void setPrivilege(int)
++ void setDate(String)
++ void setMail(String)
++ void setPassword(String)
++ void setStreet(String)
++ Students getResult()
+}
+class com.mycompany.app.Facade {
++ {static} ArrayList<Hostel> allHostels
++ {static} ArrayList<User> allUsers
++ {static} ArrayList<Students> allStudents
++ {static} ArrayList<Hostel> allHostelsSecond
++ {static} ArrayList<User> allUsersSecond
++ {static} ArrayList<Students> allStudentsSecond
++ {static} ArrayList<Hostel> allHostelsThird
++ {static} ArrayList<User> allUsersThird
++ {static} ArrayList<Students> allStudentsThird
++ {static} void setDBConnection()
++ {static} void BeginService(String,int)
++ {static} void BeginSecondService(String,int)
++ {static} void BeginThirdService(String,int)
+}
+class com.mycompany.app.Facade.HostelsData {
++ {static} ArrayList<Hostel> setHostelData()
++ {static} ArrayList<User> setUserData(ArrayList<Hostel>)
++ {static} ArrayList<Students> setStudentsData(ArrayList<Hostel>)
++ {static} ArrayList<Students> getAllstudents(Data,studentsBuild,ArrayList<Hostel>)
++ {static} ArrayList<User> getAllUsers(Data,userBuild,ArrayList<Hostel>)
++ {static} Hostel getHostelById(int,ArrayList<Hostel>)
++ {static} ArrayList<Hostel> getAllHostels(Data,hostelBuild)
+}
+class com.mycompany.app.Facade.InsertSecondData {
++ {static} ArrayList<Hostel> setHostelData()
++ {static} ArrayList<User> setUserData(ArrayList<Hostel>)
++ {static} ArrayList<Students> setStudentsData(ArrayList<Hostel>)
++ {static} ArrayList<Students> getAllstudents(Data,studentsBuild,ArrayList<Hostel>)
++ {static} ArrayList<User> getAllUsers(Data,userBuild,ArrayList<Hostel>)
++ {static} Hostel getHostelById(int,ArrayList<Hostel>)
++ {static} ArrayList<Hostel> getAllHostels(Data,hostelBuild)
+}
+class com.mycompany.app.Facade.InsertThirdData {
++ {static} ArrayList<Hostel> setHostelData()
++ {static} ArrayList<User> setUserData(ArrayList<Hostel>)
++ {static} ArrayList<Students> setStudentsData(ArrayList<Hostel>)
++ {static} ArrayList<Students> getAllstudents(Data,studentsBuild,ArrayList<Hostel>)
++ {static} ArrayList<User> getAllUsers(Data,userBuild,ArrayList<Hostel>)
++ {static} Hostel getHostelById(int,ArrayList<Hostel>)
++ {static} ArrayList<Hostel> getAllHostels(Data,hostelBuild)
+}
+class com.mycompany.app.Hendler.HandlerSecond {
+}
+class com.mycompany.app.Hendler.HandlerSecond.StudentsHandler {
++ void handle(HttpExchange)
+}
+class com.mycompany.app.Hendler.HandlerSecond.UsersHandler {
++ void handle(HttpExchange)
+}
+class com.mycompany.app.Hendler.HandlerSecond.HostelsHandler {
++ void handle(HttpExchange)
+}
+class com.mycompany.app.Specifications.SpecificationState {
++ String tempState
++ boolean isSatisfiedBy(Students)
+}
+class com.mycompany.app.Hendler.HendlerThird {
+}
+class com.mycompany.app.Hendler.HendlerThird.StudentsHandler {
++ void handle(HttpExchange)
+}
+class com.mycompany.app.Hendler.HendlerThird.StudentsIdHandler {
++ void handle(HttpExchange)
+}
+class com.mycompany.app.Request {
+- String request
++ Object exec()
+- String get_type_request(String)
+}
+interface com.mycompany.app.Request.HandlerRequest {
++ void setNext(HandlerRequest)
++ Object handler(String,String)
+}
+class com.mycompany.app.Request.BasicRequest {
++ HandlerRequest next
++ void setNext(HandlerRequest)
++ Object handler(String,String)
+}
+class com.mycompany.app.Request.GetRequest {
++ Object handler(String,String)
+}
+class com.mycompany.app.Request.InsertRequest {
++ Object handler(String,String)
+}
+class com.mycompany.app.Request.DeleteRequest {
++ Object handler(String,String)
+}
+class com.mycompany.app.Request.UpdateRequest {
++ Object handler(String,String)
+}
+class com.mycompany.app.ToBuild.userBuild {
+~ User result
++ void reset()
++ void setId(int)
++ void setName(String)
++ void setNumbOfRoom(int)
++ void setState(String)
++ void setFaculty(String)
++ void setLetters(String)
++ void setNumbOfGroup(int)
++ void setHostel(Hostel)
++ void setPrivilege(int)
++ void setDate(String)
++ void setMail(String)
++ void setPassword(String)
++ void setStreet(String)
++ User getResult()
+}
+class com.mycompany.app.DatabaseConectionSecond {
+~ {static} String db
+~ {static} String serverip
+~ {static} String serverPort
+~ {static} String url
+~ {static} String driver
+- {static} Connection connect
++ {static} Connection connectToDB()
++ {static} void closeConnection()
+}
+interface com.mycompany.app.Specifications.Specification {
++ boolean isSatisfiedBy(T)
+}
+class com.mycompany.app.Specifications.SpecificationHostelName {
+- String temp_Name
++ boolean isSatisfiedBy(User)
+}
+class com.mycompany.app.Specifications.SpecificationNot {
+- Specification<T> spec
++ boolean isSatisfiedBy(T)
+}
+
+
+com.mycompany.app.Specifications.SpecificationAbs <|-- com.mycompany.app.Specifications.SpecificationAnd
+com.mycompany.app.Hendler.Hendlers +.. com.mycompany.app.Hendler.Hendlers.StudentsHandler
+com.mycompany.app.Hendler.HttpHandler <|.. com.mycompany.app.Hendler.Hendlers.StudentsHandler
+com.mycompany.app.Hendler.Hendlers +.. com.mycompany.app.Hendler.Hendlers.UserHandler
+com.mycompany.app.Hendler.HttpHandler <|.. com.mycompany.app.Hendler.Hendlers.UserHandler
+com.mycompany.app.Hendler.Hendlers +.. com.mycompany.app.Hendler.Hendlers.HostelsHandler
+com.mycompany.app.Hendler.HttpHandler <|.. com.mycompany.app.Hendler.Hendlers.HostelsHandler
+com.mycompany.app.RequestThird +.. com.mycompany.app.RequestThird.HandlerRequest
+com.mycompany.app.RequestThird +.. com.mycompany.app.RequestThird.BasicRequest
+com.mycompany.app.HandlerRequest <|.. com.mycompany.app.RequestThird.BasicRequest
+com.mycompany.app.RequestThird +.. com.mycompany.app.RequestThird.GetRequest
+com.mycompany.app.BasicRequest <|-- com.mycompany.app.RequestThird.GetRequest
+com.mycompany.app.Specifications.SpecificationAbs <|-- com.mycompany.app.Specifications.SpecificationFaculty
+com.mycompany.app.ToBuild.Data +.. com.mycompany.app.ToBuild.Data.insideData
+com.mycompany.app.Specifications.Specification <|.. com.mycompany.app.Specifications.SpecificationAbs
+com.mycompany.app.ToBuild.Builder <|.. com.mycompany.app.ToBuild.hostelBuild
+com.mycompany.app.Specifications.SpecificationAbs <|-- com.mycompany.app.Specifications.SpecificationId
+com.mycompany.app.Specifications.SpecificationAbs <|-- com.mycompany.app.Specifications.SpecificationOr
+com.mycompany.app.RequestSecond +.. com.mycompany.app.RequestSecond.HandlerRequest
+com.mycompany.app.RequestSecond +.. com.mycompany.app.RequestSecond.BasicRequest
+com.mycompany.app.HandlerRequest <|.. com.mycompany.app.RequestSecond.BasicRequest
+com.mycompany.app.RequestSecond +.. com.mycompany.app.RequestSecond.GetRequest
+com.mycompany.app.BasicRequest <|-- com.mycompany.app.RequestSecond.GetRequest
+com.mycompany.app.ToBuild.Builder <|.. com.mycompany.app.ToBuild.studentsBuild
+com.mycompany.app.Facade +.. com.mycompany.app.Facade.HostelsData
+com.mycompany.app.Facade +.. com.mycompany.app.Facade.InsertSecondData
+com.mycompany.app.Facade +.. com.mycompany.app.Facade.InsertThirdData
+com.mycompany.app.Hendler.HandlerSecond +.. com.mycompany.app.Hendler.HandlerSecond.StudentsHandler
+com.mycompany.app.Hendler.HttpHandler <|.. com.mycompany.app.Hendler.HandlerSecond.StudentsHandler
+com.mycompany.app.Hendler.HandlerSecond +.. com.mycompany.app.Hendler.HandlerSecond.UsersHandler
+com.mycompany.app.Hendler.HttpHandler <|.. com.mycompany.app.Hendler.HandlerSecond.UsersHandler
+com.mycompany.app.Hendler.HandlerSecond +.. com.mycompany.app.Hendler.HandlerSecond.HostelsHandler
+com.mycompany.app.Hendler.HttpHandler <|.. com.mycompany.app.Hendler.HandlerSecond.HostelsHandler
+com.mycompany.app.Specifications.SpecificationAbs <|-- com.mycompany.app.Specifications.SpecificationState
+com.mycompany.app.Hendler.HendlerThird +.. com.mycompany.app.Hendler.HendlerThird.StudentsHandler
+com.mycompany.app.Hendler.HttpHandler <|.. com.mycompany.app.Hendler.HendlerThird.StudentsHandler
+com.mycompany.app.Hendler.HendlerThird +.. com.mycompany.app.Hendler.HendlerThird.StudentsIdHandler
+com.mycompany.app.Hendler.HttpHandler <|.. com.mycompany.app.Hendler.HendlerThird.StudentsIdHandler
+com.mycompany.app.Request +.. com.mycompany.app.Request.HandlerRequest
+com.mycompany.app.Request +.. com.mycompany.app.Request.BasicRequest
+com.mycompany.app.HandlerRequest <|.. com.mycompany.app.Request.BasicRequest
+com.mycompany.app.Request +.. com.mycompany.app.Request.GetRequest
+com.mycompany.app.BasicRequest <|-- com.mycompany.app.Request.GetRequest
+com.mycompany.app.Request +.. com.mycompany.app.Request.InsertRequest
+com.mycompany.app.BasicRequest <|-- com.mycompany.app.Request.InsertRequest
+com.mycompany.app.Request +.. com.mycompany.app.Request.DeleteRequest
+com.mycompany.app.BasicRequest <|-- com.mycompany.app.Request.DeleteRequest
+com.mycompany.app.Request +.. com.mycompany.app.Request.UpdateRequest
+com.mycompany.app.BasicRequest <|-- com.mycompany.app.Request.UpdateRequest
+com.mycompany.app.ToBuild.Builder <|.. com.mycompany.app.ToBuild.userBuild
+com.mycompany.app.Specifications.SpecificationAbs <|-- com.mycompany.app.Specifications.SpecificationHostelName
+com.mycompany.app.Specifications.SpecificationAbs <|-- com.mycompany.app.Specifications.SpecificationNot
+@enduml
